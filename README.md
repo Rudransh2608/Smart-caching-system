@@ -74,7 +74,7 @@ Evicts the least frequently accessed key.
 
 Frequency updated on every read.
 
-⏳ TTL Expiry Handling
+<h1>⏳ TTL Expiry Handling</h1>
 TTL (Time-To-Live) allows you to set expiry duration in seconds.
 
 Expired keys are automatically removed when:
@@ -83,18 +83,16 @@ A read/write is attempted.
 
 Internal _remove_expired_keys() checks each TTL.
 
-Example:
-
-<br>
+<h1>Example:</h1>
 cache.write("a", "apple", ttl=2)<br>
 time.sleep(3)<br>
-print(cache.read("a"))  # Outputs: None (expired)<br>
-🧵 Thread-Safety & Concurrent Access
+print(cache.read("a"))  # Outputs: None (expired)<br><br>
+<h1>🧵 Thread-Safety & Concurrent Access</h1>
 Uses threading.RLock() for safe access in multi-threaded environments.
 
 Every method (read, write, delete, etc.) uses a with self.lock: block to prevent race conditions.
 
-⚙️ Handling Large Datasets & Memory Limits
+<h1>⚙️ Handling Large Datasets & Memory Limits</h1>
 capacity defines the maximum number of items allowed.
 
 When full, the cache evicts old entries based on the eviction policy.
