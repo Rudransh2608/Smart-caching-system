@@ -117,7 +117,7 @@ This is possible because Python dictionaries allow any hashable key and any valu
 
 🔍 Custom Search Example
 
-# Find all keys whose value is a fruit name<br>
+<h2># Find all keys whose value is a fruit name<br></h2>
 results = cache.search(lambda k, v: isinstance(v, str) and v in ["apple", "banana"])<br>
 📦 Test Case Highlights<br>
 ✅ Test Case 1: LRU with TTL
@@ -127,13 +127,13 @@ cache.write("a", 5, ttl=2)<br>
 cache.write("b", 6, ttl=2)<br>
 cache.write("c", "cherry", ttl=2)  # Evicts "a"<br>
 time.sleep(5)<br>
-print(cache.read("a"))  # Expired, returns None<br>
+print(cache.read("a"))  # Expired, returns None<br><br>
 ✅ Test Case 2: LFU + Batch Writes
 <br>
 cache = SmartCache(capacity=10, eviction_policy='LFU')<br>
 cache.write([("a", "apple"), ("b", "tomato")], ttl=2)<br>
 for _ in range(3): cache.read("b")  # b has high frequency<br>
-cache.write("e", "mango", ttl=2)    # Evicts least used key<br>
+cache.write("e", "mango", ttl=2)    # Evicts least used key<br><br>
 ✅ Test Case 3: FIFO with List Values
 <br>
 cache = SmartCache(capacity=2, eviction_policy='FIFO')<br>
