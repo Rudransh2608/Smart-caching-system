@@ -35,9 +35,7 @@ Evicts a key if capacity is full (based on eviction policy).
 Stores the key-value pair in an internal OrderedDict:
 <br>
 self.cache["a"] = "apple"<br>
-Tracks TTL using a dictionary:
-
-<br>
+Tracks TTL using a dictionary:<br>
 self.expiry["a"] = current_time + ttl (if given)<br>
 Internally, your cache now contains: {"a": "apple"}
 
