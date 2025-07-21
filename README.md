@@ -24,7 +24,7 @@ Scalable batch writes, efficient eviction of old/stale data
 
 🔎 Efficient Reads & Deletes
 
-🛠️ How It Works
+🛠️ How It Works<br><br>
 ✅ Example: cache.write("a", "apple")
 This line calls the write() method, which:
 
@@ -41,8 +41,8 @@ Tracks TTL using a dictionary:
 self.expiry["a"] = current_time + ttl (if given)<br>
 Internally, your cache now contains: {"a": "apple"}
 
-🔑 Core Methods
-write(key, value, ttl=None)
+<h1>🔑 Core Methods</h1>
+<h3>1. write(key, value, ttl=None)</h3>
 Stores a key-value pair in cache.
 
 Supports batch insert using a list of tuples.
@@ -51,39 +51,36 @@ Automatically evicts a key if the cache is full.
 
 Sets TTL if provided.<br>
 
-read(key)
+<h3>2. read(key)</h3>
 Returns the value for a key if it exists and is not expired.
 
 Updates LRU/LFU frequency.<br>
 
-delete(key)
+<h3>3. delete(key)</h3>
 Removes a key from cache, TTL tracker, frequency, and LRU list.<br>
 
-search(predicate)
-Custom search using lambda functions or any function that takes (key, value) and returns a Boolean.<br>
+<h3>4. search(predicate)</h3>
+Custom search using lambda functions or any function that takes (key, value) and returns a Boolean.<br><br>
 
-🔁 Eviction Policies
+<h1>🔁 Eviction Policies</h1>
 📦 FIFO (First-In, First-Out)
-Evicts the oldest inserted key when full.
+Evicts the oldest inserted key when full.<br>
 
 📌 LRU (Least Recently Used)
-Evicts the least recently accessed key.
+Evicts the least recently accessed key.<br>
 
 📉 LFU (Least Frequently Used)
-Evicts the least frequently accessed key.
+Evicts the least frequently accessed key.<br>
 
 Frequency updated on every read.
 
 <h1>⏳ TTL Expiry Handling</h1>
-TTL (Time-To-Live) allows you to set expiry duration in seconds.
-
-Expired keys are automatically removed when:
+TTL (Time-To-Live) allows you to set expiry duration in seconds. Expired keys are automatically removed when:
 
 A read/write is attempted.
-
 Internal _remove_expired_keys() checks each TTL.
 
-<h1>Example:</h1>
+<u>Example:</u>
 cache.write("a", "apple", ttl=2)<br>
 time.sleep(3)<br>
 print(cache.read("a"))  # Outputs: None (expired)<br><br>
