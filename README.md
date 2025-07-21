@@ -33,17 +33,12 @@ Checks for existing/expired keys.
 Evicts a key if capacity is full (based on eviction policy).
 
 Stores the key-value pair in an internal OrderedDict:
-
-python
-Copy
-Edit
-self.cache["a"] = "apple"
+<br>
+self.cache["a"] = "apple"<br>
 Tracks TTL using a dictionary:
 
-python
-Copy
-Edit
-self.expiry["a"] = current_time + ttl (if given)
+<br>
+self.expiry["a"] = current_time + ttl (if given)<br>
 Internally, your cache now contains: {"a": "apple"}
 
 🔑 Core Methods
@@ -54,18 +49,18 @@ Supports batch insert using a list of tuples.
 
 Automatically evicts a key if the cache is full.
 
-Sets TTL if provided.
+Sets TTL if provided.<br>
 
 read(key)
 Returns the value for a key if it exists and is not expired.
 
-Updates LRU/LFU frequency.
+Updates LRU/LFU frequency.<br>
 
 delete(key)
-Removes a key from cache, TTL tracker, frequency, and LRU list.
+Removes a key from cache, TTL tracker, frequency, and LRU list.<br>
 
 search(predicate)
-Custom search using lambda functions or any function that takes (key, value) and returns a Boolean.
+Custom search using lambda functions or any function that takes (key, value) and returns a Boolean.<br>
 
 🔁 Eviction Policies
 📦 FIFO (First-In, First-Out)
@@ -90,12 +85,10 @@ Internal _remove_expired_keys() checks each TTL.
 
 Example:
 
-python
-Copy
-Edit
-cache.write("a", "apple", ttl=2)
-time.sleep(3)
-print(cache.read("a"))  # Outputs: None (expired)
+<br>
+cache.write("a", "apple", ttl=2)<br>
+time.sleep(3)<br>
+print(cache.read("a"))  # Outputs: None (expired)<br>
 🧵 Thread-Safety & Concurrent Access
 Uses threading.RLock() for safe access in multi-threaded environments.
 
@@ -108,53 +101,42 @@ When full, the cache evicts old entries based on the eviction policy.
 
 Supports scalable batch writes like:
 
-python
-Copy
-Edit
 cache.write([("a", "apple"), ("b", "banana")], ttl=5)
 💡 Supports Multiple Data Types
 You can store:
-
+<br>
 Strings: "apple"
-
+<br>
 Numbers: 123
-
+<br>
 Lists: ["a", "b", "c"]
-
+<br>
 Even complex objects (like dictionaries)
-
+<br>
 This is possible because Python dictionaries allow any hashable key and any value.
 
 🔍 Custom Search Example
-python
-Copy
-Edit
-# Find all keys whose value is a fruit name
-results = cache.search(lambda k, v: isinstance(v, str) and v in ["apple", "banana"])
-📦 Test Case Highlights
+
+# Find all keys whose value is a fruit name<br>
+results = cache.search(lambda k, v: isinstance(v, str) and v in ["apple", "banana"])<br>
+📦 Test Case Highlights<br>
 ✅ Test Case 1: LRU with TTL
-python
-Copy
-Edit
-cache = SmartCache(capacity=2, eviction_policy='LRU')
-cache.write("a", 5, ttl=2)
-cache.write("b", 6, ttl=2)
-cache.write("c", "cherry", ttl=2)  # Evicts "a"
-time.sleep(5)
-print(cache.read("a"))  # Expired, returns None
+<br>
+cache = SmartCache(capacity=2, eviction_policy='LRU')<br>
+cache.write("a", 5, ttl=2)<br>
+cache.write("b", 6, ttl=2)<br>
+cache.write("c", "cherry", ttl=2)  # Evicts "a"<br>
+time.sleep(5)<br>
+print(cache.read("a"))  # Expired, returns None<br>
 ✅ Test Case 2: LFU + Batch Writes
-python
-Copy
-Edit
-cache = SmartCache(capacity=10, eviction_policy='LFU')
-cache.write([("a", "apple"), ("b", "tomato")], ttl=2)
-for _ in range(3): cache.read("b")  # b has high frequency
-cache.write("e", "mango", ttl=2)    # Evicts least used key
+<br>
+cache = SmartCache(capacity=10, eviction_policy='LFU')<br>
+cache.write([("a", "apple"), ("b", "tomato")], ttl=2)<br>
+for _ in range(3): cache.read("b")  # b has high frequency<br>
+cache.write("e", "mango", ttl=2)    # Evicts least used key<br>
 ✅ Test Case 3: FIFO with List Values
-python
-Copy
-Edit
-cache = SmartCache(capacity=2, eviction_policy='FIFO')
-cache.write("a", ["hello", "hye"], ttl=5)
-cache.write("b", "banana", ttl=5)
+<br>
+cache = SmartCache(capacity=2, eviction_policy='FIFO')<br>
+cache.write("a", ["hello", "hye"], ttl=5)<br>
+cache.write("b", "banana", ttl=5)<br>
 cache.write("c", "cherry", ttl=5)  # Evicts "a"
