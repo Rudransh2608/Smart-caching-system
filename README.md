@@ -22,7 +22,7 @@ Scalable batch writes, efficient eviction of old/stale data
 
 ⚡ Batch Write for multiple key-value pairs
 
-✨ Supports different data type including string, integer, lists and dictionaries
+✨ limited data size and frequent access  
 
 🔎 Efficient Reads & Deletes
 
