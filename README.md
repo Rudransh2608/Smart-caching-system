@@ -63,10 +63,8 @@ Custom search using lambda functions or any function that takes (key, value) and
 <h1>🔁 Eviction Policies</h1>
 📦 FIFO (First-In, First-Out)
 Evicts the oldest inserted key when full.<br>
-
 📌 LRU (Least Recently Used)
 Evicts the least recently accessed key.<br>
-
 📉 LFU (Least Frequently Used)
 Evicts the least frequently accessed key.<br>
 
